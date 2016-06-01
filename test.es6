@@ -85,7 +85,7 @@ describe("room", () => {
 
   });
 
-  it("player looses hp in flameroom", () => {
+  it("player loses hp in flameroom", () => {
 
     var r1 = new Room('1', 'room 1');
     var flameroom = new Room('2', 'flameroom', 4);
@@ -96,6 +96,42 @@ describe("room", () => {
     player.move('north');
 
     expect(player.hp).toBe(16);
+
+  });
+
+  it("player has inventory", () => {
+
+    var r1 = new Room('1', 'room 1');
+    var player = new Player('Adam', r1, 20);
+
+    expect(player.inventory).toEqual([]);
+
+  });
+
+  it("player can put items into the inventory", () => {
+
+    var r1 = new Room('1', 'room 1');
+    var player = new Player('Adam', r1, 20);
+
+    player.pickUpItem('cheese');
+    player.pickUpItem('salt');
+    player.pickUpItem('onion');
+
+    expect(player.inventory).toEqual(['cheese', 'salt', 'onion']);
+
+  });
+
+  it("player can drop items from the inventory", () => {
+
+    var r1 = new Room('1', 'room 1');
+    var player = new Player('Adam', r1, 20);
+
+    player.pickUpItem('cheese');
+    player.pickUpItem('salt');
+    player.pickUpItem('onion');
+    player.dropItem('salt');
+
+    expect(player.inventory).toEqual(['cheese', 'onion']);
 
   });
 
