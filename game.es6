@@ -52,19 +52,23 @@ class Player {
     this.previousRoom.playerIn = false;
     this.hp -= this.currentRoom.damage;
   };
-  pickUpItem(name) {
-    this.inventory.push(name);
+  pickUpItem(item) {
+    this.inventory.push(item.name);
   };
-  dropItem(name) {
-    var index = this.inventory.indexOf(name);
+  dropItem(item) {
+    var index = this.inventory.indexOf(item.name);
     if (index > -1) {
     this.inventory.splice(index, 1);
     }
   };
+  useItem(item) {
+    this.hp += item.healValue;
+  }
 };
 
 class Item {
-  constructor(name) {
+  constructor(name, healValue = 0) {
     this.name = name;
+    this.healValue = healValue;
   };
 };

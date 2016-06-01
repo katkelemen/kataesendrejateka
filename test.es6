@@ -113,9 +113,13 @@ describe("room", () => {
     var r1 = new Room('1', 'room 1');
     var player = new Player('Adam', r1, 20);
 
-    player.pickUpItem('cheese');
-    player.pickUpItem('salt');
-    player.pickUpItem('onion');
+    var cheese = new Item('cheese');
+    var onion = new Item('onion');
+    var salt = new Item('salt');
+
+    player.pickUpItem(cheese);
+    player.pickUpItem(salt);
+    player.pickUpItem(onion);
 
     expect(player.inventory).toEqual(['cheese', 'salt', 'onion']);
 
@@ -126,12 +130,29 @@ describe("room", () => {
     var r1 = new Room('1', 'room 1');
     var player = new Player('Adam', r1, 20);
 
-    player.pickUpItem('cheese');
-    player.pickUpItem('salt');
-    player.pickUpItem('onion');
-    player.dropItem('salt');
+    var cheese = new Item('cheese');
+    var onion = new Item('onion');
+    var salt = new Item('salt');
+
+    player.pickUpItem(cheese);
+    player.pickUpItem(salt);
+    player.pickUpItem(onion);
+    player.dropItem(salt);
 
     expect(player.inventory).toEqual(['cheese', 'onion']);
+
+  });
+
+  it("player heals when drinking healing potion", () => {
+
+    var r1 = new Room('1', 'room 1');
+    var player = new Player('Adam', r1, 16);
+    var healingPotion = new Item('healing potion', 2);
+
+    player.pickUpItem(healingPotion);
+    player.useItem(healingPotion);
+
+    expect(player.hp).toBe(18);
 
   });
 
