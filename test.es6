@@ -62,6 +62,41 @@ describe("room", () => {
 
   });
 
+  it("player has hp", () => {
 
+    var r1 = new Room('1', 'room 1');
+    var player = new Player('Adam', r1, 20);
+    expect(player.hp).toBeDefined();
+
+  });
+
+  it("player in room", () => {
+
+    var r1 = new Room('1', 'room 1', true);
+    var r2 = new Room('2', 'room 2');
+
+    r1.setNeighbour('north', r2);
+    var player = new Player('Adam', r1);
+
+    player.move('north');
+
+    expect(r1.playerIn).toBe(false);
+    expect(r2.playerIn).toBe(true);
+
+  });
+
+  it("player looses hp in flameroom", () => {
+
+    var r1 = new Room('1', 'room 1');
+    var flameroom = new Room('2', 'flameroom', 4);
+
+    r1.setNeighbour('north', flameroom);
+    var player = new Player('Adam', r1, 20);
+
+    player.move('north');
+
+    expect(player.hp).toBe(16);
+
+  });
 
 });
