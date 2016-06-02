@@ -2,11 +2,11 @@
 
 class Room {
 
-  constructor(id, description, damage = 0) {
+  constructor(id, description, damage ) {
     this.id = id;
     this.description = description;
     this.playerIn = false;
-    this.damage = damage;
+    this.damage = damage || 0;
   }
   setNeighbour(direction, neighbourRoom) {
 
