@@ -14,7 +14,9 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: ['*.es6'],
+    files: [
+	'bower_components/angular/angular.min.js',
+	'*.es6'],
 
 
     // list of files to exclude
