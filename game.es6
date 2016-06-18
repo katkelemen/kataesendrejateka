@@ -53,3 +53,10 @@ class Player {
   }
 
 }
+
+var csvRoomConverter = (room) =>
+  (room == "") ? 0 : parseInt(room);
+
+var csvToArray = (csv) =>
+  csv.split("\n")
+  .map((row) => row.split(",").map(csvRoomConverter));

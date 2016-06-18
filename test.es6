@@ -100,3 +100,26 @@ describe("room", () => {
   });
 
 });
+
+describe("csv to array", () => {
+
+  it("simple empty grid", () => {
+    let csv = ",\n,";
+    let result = [[0,0],[0,0]];
+    expect(csvToArray(csv)).toEqual(result);
+  });
+
+  it("simple grid", () => {
+    let csv = "1,\n,";
+    let result = [[1,0],[0,0]];
+    expect(csvToArray(csv)).toEqual(result);
+  });
+
+  it("less simple grid", () => {
+    let csv = "1,2,3\n4,5,";
+    let result = [[1,2,3],[4,5,0]];
+    expect(csvToArray(csv)).toEqual(result);
+  });
+
+
+});
