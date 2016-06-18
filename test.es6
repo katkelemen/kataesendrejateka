@@ -178,5 +178,15 @@ describe("csv to array", () => {
     expect(csvToArray(csv)).toEqual(result);
   });
 
+  it("room array to json", () => {
+    let roomArray = [[1,2],[3,4]];
+    let result = {
+      1:{east:2, south:3},
+      2:{south:4},
+      3:{east:4}
+    };
+    expect(roomArrayToJson(roomArray)).toEqual(result);
+  });
+
 
 });

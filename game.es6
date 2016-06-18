@@ -67,13 +67,11 @@ class Player {
 };
 
 class Item {
-  constructor(name, healValue = 0) {
+  constructor(name, healValue) {
     this.name = name;
-    this.healValue = healValue;
+    this.healValue = healValue || 0;
   };
 };
-
-}
 
 var csvRoomConverter = (room) =>
   (room == "") ? 0 : parseInt(room);
@@ -81,4 +79,21 @@ var csvRoomConverter = (room) =>
 var csvToArray = (csv) =>
   csv.split("\n")
   .map((row) => row.split(",").map(csvRoomConverter));
-=======
+
+var roomArrayToJson = (roomArray) => {
+  let width = roomArray[0].length;
+  let height = roomArray.length;
+  let result = {};
+  roomArray.forEach((row, rowIndex) => row
+    .forEach((room, roomIndex) => {
+      if (roomArray[rowIndex][roomIndex+1] > 0) {
+        result[room] = result[room] || {}
+        result[room].east = roomArray[rowIndex][roomIndex+1];
+      }
+      if ((rowIndex < (height - 1)) && roomArray[rowIndex+1][roomIndex] > 0) {
+        result[room] = result[room] || {}
+        result[room].south = roomArray[rowIndex+1][roomIndex];
+      }
+    }));
+  return result
+}
